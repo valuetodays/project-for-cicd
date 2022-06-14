@@ -1,0 +1,38 @@
+# for gitee
+kind: pipeline
+type: docker
+name: projects-for-git-ci/cd
+
+workspace:
+  path: /drone/src
+
+clone:
+  depth: 1
+
+steps:
+  - name: compile code
+    image: maven:3.6.3-jdk-8-slim
+    environment:
+      KEY_A: value_a
+    volumes:
+      - name: maven_m2_dir
+        path: /root/.m2   # path in the container
+    commands:
+      - env
+      - mvn -v
+      - mvn clean
+      - mvn compile test -Duser.timezone=GMT+08 -B -V
+      - mvn install -Dmaven.javadoc.skip=true -B -V
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
+    - custom
+
+volumes:
+  - name: maven_m2_dir
+    host:
+      path: /opt/maven-m2 # path in host machine
+
