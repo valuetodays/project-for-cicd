@@ -1,4 +1,4 @@
-package cn.valuetodays.test.project;
+package cn.valuetodays.projectforcicd;
 
 /**
  * .
