@@ -18,9 +18,9 @@ steps:
       - name: maven_m2_dir
         path: /root/.m2   # path in the container
     commands:
-      - mvn clean
+#      - mvn clean
 #      - mvn compile test -Duser.timezone=GMT+08 -B -V
-      - mvn install -Dmaven.javadoc.skip=true -B -V
+      - mvn clean install -Dmaven.javadoc.skip=true -B -V
 
 trigger:
   branch:
